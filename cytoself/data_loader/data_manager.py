@@ -43,9 +43,9 @@ class DataManager:
                 for d in [self.train_label, self.val_label, self.test_label]
                 if len(d) > 0
             ]
-        )
-        self.uniq_label = np.unique(label_all)
-        self.n_classes = len(self.uniq_label)
+        )#stack all train, test, validation labels
+        self.uniq_label = np.unique(label_all)#escape the repetition of data in train, test, validation. escaping data leakage
+        self.n_classes = len(self.uniq_label)#how many gene we get in total
 
     def get_label_onehot(self, col=0):
         """
@@ -65,6 +65,7 @@ class DataManager:
         self.test_label_onehot = np.zeros(
             (len(self.test_label), self.n_classes), dtype=np.float32
         )
+        #A fancy way to generate one-hot-encode, learned!!!
         for i, c in enumerate(self.uniq_label):
             self.train_label_onehot[:, i] = self.train_label[:, col] == c
             self.val_label_onehot[:, i] = self.val_label[:, col] == c
