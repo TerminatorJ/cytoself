@@ -100,7 +100,7 @@ class CytoselfFullModel(CytoselfSQModel):
         self.fc_blocks = []
         self.fc_outputs = []
         self.dropout_rate = kwargs["dropout_rate"]
-
+        #super means inherit
         super().__init__(
             input_image_shape,
             output_image_shape,
